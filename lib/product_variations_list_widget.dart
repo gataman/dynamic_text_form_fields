@@ -46,10 +46,17 @@ class _ProductVariationsListWidgetState extends State<ProductVariationsListWidge
       itemBuilder: (context, index) {
         final productVariations = _productVariationsList[index];
         return ProductVariationsListItem(
+          // Şu oluşturulan alt widget key olması lazım yoksa herhangi bir itemder deyip siliyor.
+          key: ObjectKey(productVariations),
           productVariations: productVariations,
           onAddItemClicked: () {
             setState(() {
               _productVariationsList.add(ProductVariations());
+            });
+          },
+          onDeleteItemClicked: (ProductVariations productVariations) {
+            setState(() {
+              _productVariationsList.remove(productVariations);
             });
           },
         );

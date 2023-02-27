@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import '../model/product_variations.dart';
 
 class ProductVariationsListItem extends StatelessWidget {
-  const ProductVariationsListItem({super.key, required this.productVariations, required this.onAddItemClicked});
+  const ProductVariationsListItem(
+      {super.key, required this.productVariations, required this.onAddItemClicked, required this.onDeleteItemClicked});
 
   final ProductVariations productVariations;
   final VoidCallback onAddItemClicked;
+  final Function(ProductVariations productVariations) onDeleteItemClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,8 @@ class ProductVariationsListItem extends StatelessWidget {
           _valueTextFormField(),
           const SizedBox(width: 8),
           _addButton(),
+          const SizedBox(width: 8),
+          _deleteButton(),
         ],
       ),
     );
@@ -70,6 +74,18 @@ class ProductVariationsListItem extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onAddItemClicked,
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  Widget _deleteButton() {
+    return SizedBox(
+      height: 40,
+      child: ElevatedButton(
+        onPressed: () {
+          onDeleteItemClicked(productVariations);
+        },
+        child: const Icon(Icons.delete),
       ),
     );
   }
